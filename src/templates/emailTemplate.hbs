@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h2>Monday.com Weekly Report</h2>
+  <p>Hello, here is the latest update from Monday.com:</p>
+
+  <table>
+    <tr>
+      <th>Item Name</th>
+      <th>Details</th>
+    </tr>
+    {{#each items}}
+    <tr>
+      <td>{{this.name}}</td>
+      <td>{{this.details}}</td>
+    </tr>
+    {{/each}}
+  </table>
+
+  <p>Best Regards,</p>
+  <p>Your Team</p>
+</body>
+</html>
