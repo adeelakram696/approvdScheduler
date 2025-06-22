@@ -1,8 +1,6 @@
 import nodemailer from "nodemailer";
-import handlebars from "handlebars";
-import fs from "fs";
-import { config } from "../config/config";
-import { logger } from "../utils/logger";
+import { config } from "../config";
+import { log, logger } from "../utils/logger";
 
 const transporter = nodemailer.createTransport({
   host: config.smtp.host,
@@ -14,22 +12,17 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendEmail(items: { name: string; details: string }[]) {
+export async function sendEmail(emailContent: any, subject: string) {
   try {
-    const templateSource = fs.readFileSync("src/templates/emailTemplate.hbs", "utf8");
-    const template = handlebars.compile(templateSource);
-    const emailContent = template({ items });
-
     const mailOptions = {
       from: config.smtp.user,
-      to: config.recipientEmail,
-      subject: "Monday.com Weekly Report",
+      to: config.recipientEmails,
+      subject,
       html: emailContent,
     };
-
     await transporter.sendMail(mailOptions);
     logger.info("📧 Email sent successfully!");
   } catch (error) {
-    console.error("❌ Error sending email", error);
+    log("❌ Error sending email", error);
   }
 }

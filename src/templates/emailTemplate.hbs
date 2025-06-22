@@ -3,29 +3,48 @@
 <head>
   <style>
     body { font-family: Arial, sans-serif; }
-    table { width: 100%; border-collapse: collapse; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
     th { background-color: #f4f4f4; }
   </style>
 </head>
 <body>
-  <h2>Monday.com Weekly Report</h2>
-  <p>Hello, here is the latest update from Monday.com:</p>
+  <h2>Broker Performance Report</h2>
+  <p><strong>Time Period:</strong> {{timePeriod.start}} - {{timePeriod.end}}</p>
 
   <table>
-    <tr>
-      <th>Item Name</th>
-      <th>Details</th>
-    </tr>
-    {{#each items}}
-    <tr>
-      <td>{{this.name}}</td>
-      <td>{{this.details}}</td>
-    </tr>
-    {{/each}}
+    <thead>
+      <tr>
+        <th>Broker</th>
+        <th>Total # of Active Leads Assigned</th>
+        <th># of Leads Assigned During This Time Period</th>
+        <th># of Leads Disqualified During This Time Period</th>
+        <th># of Attempted Calls</th>
+        <th>Deals Submitted</th>
+        <th>Offers Received</th>
+        <th>Deals Funded</th>
+        <th>Conversion Ratio (Funded/Approvals)</th>
+        <th>Avg Funded Deal Size</th>
+        <th>Avg Time from Application to Funded</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each brokers}}
+      <tr>
+        <td>{{this.person.name}}</td>
+        <td>{{this.allLeadsAssigned}}</td>
+        <td>{{this.leadsAssigned}}</td>
+        <td>{{this.allLeadsDisqualified}}</td>
+        <td>{{this.[follow up call]}}</td>
+        <td>{{this.[deal submitted]}}</td>
+        <td>{{this.[offer received back]}}</td>
+        <td>{{this.[fully funded]}}</td>
+        <td>{{this.conversionRatio}}</td>
+        <td>${{#if this.averageFunds}}{{this.averageFunds}}{{else}}0{{/if}}</td>
+        <td>{{#if this.averageDaysDifference}}{{this.averageDaysDifference}}{{else}}0{{/if}} days</td>
+      </tr>
+      {{/each}}
+    </tbody>
   </table>
-
-  <p>Best Regards,</p>
-  <p>Your Team</p>
 </body>
 </html>
