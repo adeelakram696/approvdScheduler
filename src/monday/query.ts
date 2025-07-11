@@ -206,7 +206,7 @@ export const getDealFunds = async (employees: any[], duration: any) => {
   // ✅ Compute averages per person
   Object.keys(funds).forEach((personId) => {
     const personData = funds[personId];
-    const averageFunds = personData.totalfunds / personData.totalDeals;
+    const averageFunds = personData.totalfunds;
     const averageDaysDifference = personData.totalDaysDifference / personData.totalDeals;
 
     funds[personId] = {
